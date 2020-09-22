@@ -34,7 +34,7 @@ Send Messages
     }
 ```
 ## About 
-    This project is developed by Jerry S Joseph as a demostration of WebSockets via socket.io. This application is developed in Node.js and hosted in glitch.
+This project is developed by Jerry S Joseph as a demostration of WebSockets via socket.io. This application is developed in Node.js and hosted in glitch.
 
 ## Server Endpoint
 
