@@ -34,11 +34,12 @@ Send Messages
     }
 ```
 ## About 
-This project is developed by Jerry S Joseph as a demostration of WebSockets via socket.io. This application is developed in Node.js and hosted in glitch.
+This project is developed by Jerry S Joseph as a demostration of WebSockets via socket.io. This application is developed in Node.js and hosted in heroku.
 
 ## Server Endpoint
 
 Visit this link to check if the hosted server is running...
+
 https://realtimechat-server1.herokuapp.com/
 
 License
