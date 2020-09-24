@@ -40,12 +40,16 @@ io.on('connection',(socket)=>{
         }
        
     })
-    io.emit('users',{online:getOnlineRoom('all')})
+  //  io.emit('users',{online:getOnlineRoom('all')})
     //Join event fired by client
-    socket.on('join',({name,rid},callback)=>{
+    socket.on('join',({name,rid})=>{
        
         if(checkUserExists(name))
-            return callback({error:"User exists"});
+        {
+            socket.emit('error-join',{error:"User exists"});
+            return ;
+        }
+           
         //trying to join to room
         socket.join(rid,(error)=>{
             if(error)
@@ -53,6 +57,7 @@ io.on('connection',(socket)=>{
             else
                 {
                     onlineUsers.set(socket.id,{sid:socket.id,name:name,room:rid});
+                    socket.emit('join-success',{sid:socket.id,name:name,room:rid});
                     io.to(rid).emit('users',{online:getOnlineRoom(rid)})
                     console.log(`${name} joined in ${rid}`);
                     let adminmsg=`${name} has joined the chat`;
@@ -79,9 +84,11 @@ io.on('connection',(socket)=>{
                 socket:socketid
             }
             io.to(rid).emit('message',messageObject);
-            return callback({status:"success"})
+            socket.emit('sendMessage-response',{success:true,status:"success"})
+            return;
         }
-        return callback({status:"you are offline"})
+        socket.emit('sendMessage-response',{success:false,status:"you are offline"})
+        return ;
     })
 })
 
